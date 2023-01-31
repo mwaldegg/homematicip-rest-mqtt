@@ -12,9 +12,9 @@ After=multi-user.target
 [Service]
 Type=simple
 Restart=always
-User=pi
-ExecStart=/usr/bin/python3 /home/pi/homematicip-rest-mqtt/main.py --server 127.0.0.1
-WorkingDirectory=/home/pi/homematicip-rest-mqtt
+User=openhabian
+ExecStart=/usr/bin/python3 /home/openhabian/homematicip-rest-mqtt/main.py --server 127.0.0.1 --debug
+WorkingDirectory=/home/openhabian/homematicip-rest-mqtt
 
 [Install]
 WantedBy=multi-user.target
