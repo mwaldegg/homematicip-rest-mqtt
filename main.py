@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 import homematicip
 from homematicip.home import Home
 from homematicip.device import TemperatureHumiditySensorOutdoor, HeatingThermostat, HeatingThermostatCompact, ShutterContact, ShutterContactMagnetic, ContactInterface, RotaryHandleSensor, WallMountedThermostatPro
-from homematicip.group import HeatingGroup
+from homematicip.group import HeatingGroup, SecurityZoneGroup
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
@@ -97,6 +97,13 @@ def updateHomematicObject(payload):
             "valve": payload.valvePosition,
             "window": payload.windowState,
             "mode": payload.controlMode
+        }
+    elif payloadType == SecurityZoneGroup:
+        topic += "groups/securityzone/" + payload.id
+        data = {
+            "label": payload.label,
+            "active": payload.active,
+            "window": payload.windowState
         }
     elif payloadType in (HeatingThermostat, HeatingThermostatCompact):
         topic += "devices/thermostat/" + payload.id
